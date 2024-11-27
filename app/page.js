@@ -21,6 +21,14 @@ export default function Home() {
             </code>
             .
           </li>
+          <li className="mb-2">
+            This is to test the GIT Merge to main branch on the remote/cloud
+            Get started by editing{" "}
+            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
+              app/page.js
+            </code>
+            .
+          </li>
           <li>Save and see your changes instantly.</li>
         </ol>
 
