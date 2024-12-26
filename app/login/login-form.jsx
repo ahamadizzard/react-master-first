@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { loginUser } from "@/app/libs/apis/server";
 
 export default function LoginForm({ title }) {
   const [email, setEmail] = useState("");
@@ -8,16 +9,6 @@ export default function LoginForm({ title }) {
   const [passwordError, setPasswordError] = useState("");
 
   const validateForm = () => {
-    // if(!email && !password){
-    //   setEmailError("Email is required");
-    //   setPasswordError("Password is required");
-    //   return false;
-    // }else{
-    //   setEmailError("");
-    //   setPasswordError("");
-    //   return true;
-    // }
-
     if (!email) {
       setEmailError("Email is required");
       return false;
@@ -30,14 +21,16 @@ export default function LoginForm({ title }) {
     } else {
       setPasswordError("");
     }
+    return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // prevent page refresh
-    //login logic
     const isValid = validateForm();
     if (isValid) {
-      console.log("Form Data - ", { email: email, password: password });
+      // console.log("Form Data - ", { email: email, password: password });
+      const login = await loginUser({ email: email, password: password }); // call login api
+      console.log("LOGIN RESPONSE", login);
     }
   };
   return (
@@ -47,7 +40,7 @@ export default function LoginForm({ title }) {
           {/* title */}
           <h3 className="text-blue-600 text-xl font-semibold mb-4">
             {title}
-            Sign in to Izz Solutions
+
           </h3>
           {/* email */}
           <div>
@@ -120,8 +113,8 @@ export default function LoginForm({ title }) {
           {/* for sign in button */}
           <div>
             <button
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm px-5 py-2.5 text-center"
               type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Sign in
             </button>
