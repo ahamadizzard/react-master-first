@@ -19,8 +19,6 @@ export const loginUser = async (loginData) => {
 
 export const getMovies = async () => {
   try {
-    // const response = await api.get("movies", {
-    // cache: "no-store",
     const response = await api.get("movies", {
       cache: "no-store",
     }); //fetching the data from the server
