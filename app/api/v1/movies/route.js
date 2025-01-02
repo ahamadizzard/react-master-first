@@ -14,7 +14,7 @@ export const GET = async (req) => {
       .collection("movies") // Use the "movies" collection
       .find()
       .sort({ metacritic: -1 }) // Sort in descending order
-      .limit(10) // Limit the results to 10
+      .limit(100) // Limit the results to 10
       .toArray(); // Convert the cursor to an array
     return NextResponse.json(movies); // Return the movies
   } catch (error) {
