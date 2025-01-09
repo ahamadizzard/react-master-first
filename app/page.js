@@ -8,8 +8,22 @@ export default function Home() {
   return (
     <div>
       <title>Learning ReactMaster @ Evotech</title>
+
       <section className="hero min-h-screen flex flex-col bg-blue-300 items-center justify-center text-center p-8">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Next.js Learning</h1>
+        <div className="flex justify-center mb-3 w-full max-w-5xl">
+          <Image
+            src="/images/Hero.jpg"
+            alt="Hero Image"
+            width={800}
+            height={450}
+            className="rounded-lg shadow-2xl "
+          ></Image>
+        </div>
+
+        <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-animated animate-gradient-x">
+          Welcome to Next.js Learning
+        </h1>
+
         <p className="text-lg mb-8">
           Welcome to Evotech React/NextJS Mater Class.
         </p>

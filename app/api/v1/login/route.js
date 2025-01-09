@@ -4,6 +4,15 @@ export const POST = async (req) => {
   const request = await req.json();
   console.log("Login Data - ", request);
 
+  //backend validation
+  if (!name || !email || !password) {
+    return NextResponse.json(
+      {
+        error: "Please provide all the required fields",
+      },
+      { status: 400 } // Bad Request
+    );
+  }
   // Bind Database
   // Find the user in the database
   // Validate email and password

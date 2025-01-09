@@ -12,6 +12,20 @@ module.exports = {
       padding: "15px",
     },
     extend: {
+      backgroundImage: {
+        "gradient-animated":
+          "linear-gradient(90deg, #ff7eb3, #ff758c, #ff9a63, #ffc46d, #ffeb84)",
+      },
+      animation: {
+        "gradient-x": "gradient-x 3s ease infinite",
+      },
+      keyframes: {
+        "gradient-x": {
+          "0%": { "background-position": "0% 50%" },
+          "50%": { "background-position": "100% 50%" },
+          "100%": { "background-position": "0% 50%" },
+        },
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
