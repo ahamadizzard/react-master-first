@@ -1,6 +1,6 @@
 //this is a simple example of an endpoint that returns an empty array of movies
 import { NextResponse } from "next/server";
-import clientPromise from "../../../libs/mongodb";
+import clientPromise from "@/lib/mongodb";
 
 export const GET = async (req) => {
   //get Movies from the database

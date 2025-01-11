@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { stringify } from "postcss";
 import { stringifyError } from "next/dist/shared/lib/utils";
-import { registerUser } from "@/app/libs/apis/server";
+import { registerUser } from "@/lib/apis/server";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast"
 
@@ -125,7 +125,7 @@ export default function RegisterForm() {
                                 <div className="flex flex-col   space-y-1.5 mb-2">
                                     <Label className="font-bold" htmlFor="name">Name</Label>
                                     <Input
-                                        className="focus:bg-blue-100  focus:border-blue-300"
+                                        className="focus:bg-blue-100  focus:border-blue-300 "
                                         id="name"
                                         name="name"
                                         type="text"

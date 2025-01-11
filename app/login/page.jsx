@@ -7,7 +7,7 @@ export default function login() {
       className="flex flex-col justify-center items-center min-h-screen py-2 text-black"
       style={{ backgroundColor: "#2e86c1" }}
     >
-      <LoginForm />
+      <LoginForm title="Sign in to Izz Solutions" />
     </div>
   );
 }

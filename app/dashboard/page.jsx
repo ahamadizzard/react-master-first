@@ -1,3 +1,4 @@
+
 import React from "react";
 
 import {
@@ -10,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-import { getMovies } from "../libs/apis/server";
+import { getMovies } from "@/lib/apis/server";
 import Image from "next/image";
 export default async function DashboardPage() {
     // 1. Add shadcn card component
@@ -18,7 +19,10 @@ export default async function DashboardPage() {
     // 3. Read a dummy response
     // 4. Render data set in the UI
     const moviesQuery = await getMovies();
+    // const handleImageError = (e) => {
+    //     e.target.src = "@/../public/images/notfound.png";
 
+    // }
     // console.log("Movies Data: " + JSON.stringify(moviesQuery));
     return (
         <main>
@@ -79,6 +83,7 @@ export default async function DashboardPage() {
                                                     width={200}
                                                     height={400}
                                                     priority={true}
+                                                // onError={handleImageError}
                                                 />
                                             </div>
 
