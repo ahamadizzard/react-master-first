@@ -7,8 +7,6 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div>
-      <title>Learning ReactMaster @ Evotech</title>
-
       <section className="hero min-h-screen flex flex-col bg-blue-300 items-center justify-center text-center p-8">
         <div className="flex justify-center mb-3 w-full max-w-5xl">
           <Image

@@ -9,20 +9,22 @@ import {
     CardFooter,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
 import { getMovies } from "@/lib/apis/server";
 import Image from "next/image";
+
 export default async function DashboardPage() {
     // 1. Add shadcn card component
     // 2. Create Movies GET endpoint
     // 3. Read a dummy response
     // 4. Render data set in the UI
-    const moviesQuery = await getMovies();
-    // const handleImageError = (e) => {
-    //     e.target.src = "@/../public/images/notfound.png";
 
-    // }
-    // console.log("Movies Data: " + JSON.stringify(moviesQuery));
+    // checking if the user having a session
+    // const session = await auth.api.getSession({
+    //     headers: await headers(),
+    // });
+    // console.log("session: ", session);
+    const moviesQuery = await getMovies();
+
     return (
         <div className="">
             <h1 className="text-2xl font-bold mb-3">Movies</h1>

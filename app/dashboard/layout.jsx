@@ -2,6 +2,7 @@ import UserNav from "./components/user-nav";
 export default function DashboardLayout({ children }) {
     return (
         <div className="flex max-h-screen overflow-hidden bg-gray-100">
+            <title>Learning ReactMaster @ Evotech</title>
             {/* Side Panel */}
             <aside className="flex w-64 overflow-y-auto border-r bg-white shadow-lg">
                 <h1 className="text-2xl font-bold ">Side Panel</h1>
