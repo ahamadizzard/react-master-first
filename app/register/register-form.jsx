@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import {
     Card,
     CardHeader,
@@ -114,7 +115,7 @@ export default function RegisterForm() {
                         <h1 className="text-4xl font-bold text-white">Mflix Dashboard</h1>
                     </div>
                     <div className="flex justify-end items-center">
-                        <a
+                        <Link
                             className="bg-blue-400 flex hover:bg-blue-500 text-white font-bold py-1 px-3 rounded"
                             href="/"
                         >
@@ -133,7 +134,7 @@ export default function RegisterForm() {
                                 />
                             </svg>
                             <p>&nbsp;Home</p>
-                        </a>
+                        </Link>
                     </div>
                 </nav>
             </div>

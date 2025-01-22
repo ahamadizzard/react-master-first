@@ -156,7 +156,7 @@ export default function LoginForm(props) {
           {/* Sign Up Message */}
           <div>
             <p className="text-sm font-medium text-gray-600 dark:text-gray-300 text-center">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <a className="text-blue-600 hover:underline" href="#">
                 Sign up
               </a>
