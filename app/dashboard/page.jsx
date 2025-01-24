@@ -50,7 +50,8 @@ export default async function DashboardPage() {
                                         <div className="flex justify-center bg-black w-full h-[276px] mb-4 rounded-lg transition-transform duration-300 ease-in-out hover:scale-105">
                                             <Image // Image component from next/image
                                                 src={moviesQuery.poster}
-                                                alt={moviesQuery.title}
+                                                // alt={moviesQuery.title}
+                                                alt="Movie Poster"
                                                 className="w-full h-full object-contain rounded-lg"
                                                 width={200}
                                                 height={400}
