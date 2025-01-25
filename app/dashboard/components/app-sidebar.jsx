@@ -44,7 +44,7 @@ const items = [
 
 export function AppSidebar() {
     return (
-        <Sidebar>
+        <Sidebar className="w-48 bg-blue-700">
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>MovieFlix</SidebarGroupLabel>
@@ -52,7 +52,7 @@ export function AppSidebar() {
                         <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
+                                    <SidebarMenuButton asChild className="hover:bg-blue-300 hover:animate-pulse">
                                         <a href={item.url}>
                                             <item.icon />
                                             <span>{item.title}</span>
@@ -69,14 +69,7 @@ export function AppSidebar() {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
-                                    <a href="/dashboard/settings">
-                                        <Settings />
-                                        {/* <UserNav /> */}
-                                        <span>Settings</span>
-                                    </a>
 
-                                </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>
                     </SidebarGroupContent>

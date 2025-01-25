@@ -2,6 +2,8 @@ import React, { useState } from "react";
 // import { loginUser } from "@/lib/apis/server";
 import { signIn } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import { Loader2 } from "lucide-react";
+
 
 const DEFAULT_ERROR = {
   error: false,
@@ -10,6 +12,7 @@ const DEFAULT_ERROR = {
 
 export default function LoginForm(props) {
   const [error, setError] = useState(DEFAULT_ERROR);
+  const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -146,9 +149,10 @@ export default function LoginForm(props) {
           {/* Sign In Button */}
           <div>
             <button
-              type="submit"
+              type="submit" disabled={loading}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm px-5 py-2.5 text-center"
             >
+              {loading && < Loader2 className="animate-spin" />}
               Sign in
             </button>
           </div>
@@ -157,7 +161,7 @@ export default function LoginForm(props) {
           <div>
             <p className="text-sm font-medium text-gray-600 dark:text-gray-300 text-center">
               Don&apos;t have an account?{" "}
-              <a className="text-blue-600 hover:underline" href="#">
+              <a className="text-blue-600 hover:underline" href="/register">
                 Sign up
               </a>
             </p>
