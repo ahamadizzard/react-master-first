@@ -29,12 +29,14 @@ export default async function DashboardPage() {
         <div className="">
             <h1 className="text-2xl font-bold mb-3">Movies</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+                <h1>Movies section starts here</h1>
                 {moviesQuery?.length &&
                     moviesQuery?.map(
                         (
                             moviesQuery // for each loop can also be used here
                         ) => (
                             <div
+
                                 key={moviesQuery?._id}
                                 className="h-full bg-blue-300 rounded-lg shadow-md p-1 transition-transform duration-300 ease-in-out hover:scale-105 "
                             >
@@ -86,6 +88,7 @@ export default async function DashboardPage() {
                         )
                     )}
             </div>
-        </div>
+            <h1>Movies section ends here</h1>
+        </div >
     );
 }
