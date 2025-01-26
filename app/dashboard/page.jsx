@@ -29,7 +29,11 @@ export default async function DashboardPage() {
         <div className="">
             <h1 className="text-2xl font-bold mb-3">Movies</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-                <h1>Movies section starts here</h1>
+                {/* <h1>Movies section starts here</h1> */}
+                // display the moviesQuery data as text
+                {JSON.stringify(moviesQuery)}
+
+
                 {moviesQuery?.length &&
                     moviesQuery?.map(
                         (
@@ -88,7 +92,7 @@ export default async function DashboardPage() {
                         )
                     )}
             </div>
-            <h1>Movies section ends here</h1>
+            {/* <h1>Movies section ends here</h1> */}
         </div >
     );
 }

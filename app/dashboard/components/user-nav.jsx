@@ -51,18 +51,18 @@ export default function UserNav() {
 
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                        <User className="mr-2 h-4 w-4 text-primary-400" />
+                <DropdownMenuGroup >
+                    <DropdownMenuItem className="text-primary-400  hover:animate-pulse">
+                        <User className="mr-2 h-4 w-4 " />
                         <span>Profile</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem className=" hover:animate-pulse">
                         <Settings className="mr-2 h-4 w-4 text-primary-400" />
                         <span>Settings</span>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout}>
+                <DropdownMenuItem onClick={handleLogout} className=" hover:animate-pulse">
                     <LogOut className="mr-2 h-4 w-4 text-primary-400" />
                     <span>LogOut</span>
                 </DropdownMenuItem>
