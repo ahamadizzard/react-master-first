@@ -21,8 +21,13 @@ const items = [
         icon: Home,
     },
     {
-        title: "Movies",
+        title: "Movies Old Database",
         url: "/dashboard/movies",
+        icon: List,
+    },
+    {
+        title: "Movies New Database",
+        url: "/dashboard/moviesnewdb",
         icon: List,
     },
     {

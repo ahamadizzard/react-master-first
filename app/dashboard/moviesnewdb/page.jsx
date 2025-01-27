@@ -9,7 +9,7 @@ import {
     CardFooter,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getMovies } from "@/lib/apis/server";
+import { getMovies, getMoviesNewDB } from "@/lib/apis/server";
 import Image from "next/image";
 
 
@@ -24,7 +24,7 @@ export default async function DashboardPage() {
     //     headers: await headers(),
     // });
     // console.log("session: ", session);
-    const moviesQuery = await getMovies();
+    const moviesQuery = await getMoviesNewDB();
 
     return (
         <div className="">
