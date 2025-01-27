@@ -16,7 +16,7 @@ import {
 // Menu items.
 const items = [
     {
-        title: "Home",
+        title: "Overview",
         url: "/dashboard",
         icon: Home,
     },
@@ -64,7 +64,7 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
 
-                <SidebarGroup>
+                {/* <SidebarGroup>
                     <SidebarGroupLabel>Settings</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
@@ -73,7 +73,7 @@ export function AppSidebar() {
                             </SidebarMenuItem>
                         </SidebarMenu>
                     </SidebarGroupContent>
-                </SidebarGroup>
+                </SidebarGroup> */}
 
             </SidebarContent>
         </Sidebar>
