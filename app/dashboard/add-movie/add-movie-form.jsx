@@ -1,6 +1,6 @@
 // client component
 "use client";
-import react from "react";
+import react, { useState } from "react";
 
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,9 +13,15 @@ import { RATINGS } from "@/lib/constants";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectLabel, SelectItem } from "@/components/ui/select";
 import { Card, CardContent, CardFooter, CardBody, CardHeader, CardDescription, CardTitle } from "@/components/ui/card";
 import { createMovie } from "@/lib/actions/movie";
+import { useRouter } from "next/router";
 
 
+const DEFAULT_ERROR = {
+    error: false,
+    message: "Movie added successfully",
+};
 export default function AddMovieForm() {
+    const [error, setError] = useState(DEFAULT_ERROR);
     const [genres, setGenres] = react.useState([]);
     const [rated, setRated] = react.useState("");
     const [isLoading, setIsLoading] = react.useState(false);
@@ -33,13 +39,37 @@ export default function AddMovieForm() {
         const plot = formData.get("plot")?.toString();
 
         if (title && year && plot && rated && genres) {
-            console.log(title, year, plot, genres, rated);
-            setIsLoading(true);
-            await createMovie({ title, year, plot, genres, rated });
-            setIsLoading(false);
+            try {
+                console.log(title, year, plot, genres, rated);
+                setError(DEFAULT_ERROR);
+                setIsLoading(true);
+                await createMovie({ title, year, plot, genres, rated });
+                if (response.success) {
+                    console.log("Saving movie Response Data: ", response);
+                    setError(DEFAULT_ERROR);
+                    setIsLoading(false);
+                    router.push("/moviesnewdb");
+                } else {
+                    setError({
+                        error: true,
+                        message: "Something went wrong. Please try again later.",
+                    });
+                }
+            }
+            catch (error) {
+                setError("An unexpected error occurred. Please try again.");
+            }
+            finally {
+                setIsLoading(false);
+            }
+        } else {
+            setError("All fields are required.");
         }
-        // setIsLoading(false);
-    };
+    }
+
+
+    // setIsLoading(false);
+
 
     return (
         <Card className="max-w-2xl mx-auto rounded-t-3xl shadow-lg">
@@ -90,6 +120,12 @@ export default function AddMovieForm() {
                         </Select>
                     </div>
                 </CardContent>
+                {/* to display the validation error message */}
+                <div className="flex justify-start">
+                    {error?.error && (
+                        <span className="text-red-500 text-sm">{error.message}</span>
+                    )}
+                </div>
                 <CardFooter className="w-full flex justify-end space-x-2">
                     <button type="reset" variant="outline">Clear form</button>
                     <Button type="submit" disabled={isLoading}>

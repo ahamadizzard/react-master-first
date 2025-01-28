@@ -48,7 +48,7 @@ export default function RegisterForm() {
         if (name && email && password && confirmPassword) {
             if (password === confirmPassword) {
                 setError(DEFAULT_ERROR); // reset the error message
-                // setLoading(true);
+                setLoading(true);
                 // const registerResponse = await registerUser({ name, email, password }); // call the registerUser function from the server
                 // setLoading(false);
                 // if (registerResponse?.error) {
@@ -83,6 +83,7 @@ export default function RegisterForm() {
                             //console.log("onRequest",ctx);
                         },
                         onSuccess: (ctx) => {
+                            setLoading(false);
                             console.log("onSuccess", ctx);
                         },
                         onError: (ctx) => {

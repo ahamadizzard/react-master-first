@@ -41,11 +41,13 @@ export default function LoginForm(props) {
     e.preventDefault(); // prevent page refresh
     const isValid = validateForm();
     if (isValid) {
+      loading(true);
       await signIn.email({
         email, password,
       },
         {
           onSuccess: () => {
+            setLoading(false);
             redirect("/dashboard");
           },
           onError: (ctx) => {
