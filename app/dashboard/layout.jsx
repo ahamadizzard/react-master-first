@@ -8,7 +8,7 @@ export default function Layout({ children }) {
     return (
         <div className="flex h-screen">
             {/* Sidebar with fixed width */}
-            <div className="w-48 bg-gray-800 text-white">
+            <div className="w-60 bg-gray-800 text-white">
                 <SidebarProvider>
                     <AppSidebar />
                 </SidebarProvider>

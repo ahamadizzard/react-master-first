@@ -38,7 +38,7 @@ export default function UserNav() {
                     </Avatar>
                 </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end" forceMount>
+            <DropdownMenuContent className="w-56 text-blue-900" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal text-muted-foreground" >
                     <div className="flex flex-col ">
                         <p className="font-bold text-lg loading-none text-muted-foreground">

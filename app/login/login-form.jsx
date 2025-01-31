@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
 
+
 const DEFAULT_ERROR = {
   error: false,
   message: "",
@@ -48,7 +49,7 @@ export default function LoginForm(props) {
         {
           onSuccess: () => {
             setLoading(false);
-            redirect("/dashboard");
+            Router.push("/dashboard");
           },
           onError: (ctx) => {
             if (ctx) {

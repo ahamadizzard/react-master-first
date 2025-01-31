@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 // import { stringifyError } from "next/dist/shared/lib/utils";
 // import { registerUser } from "@/lib/apis/server";
 import { useToast } from "@/hooks/use-toast";
-// import { ToastAction } from "@/components/ui/toast"
+import { ToastAction } from "@/components/ui/toast";
 import { signUp } from "@/lib/auth-client";
 
 const DEFAULT_ERROR = {
@@ -83,8 +83,21 @@ export default function RegisterForm() {
                             //console.log("onRequest",ctx);
                         },
                         onSuccess: (ctx) => {
-                            setLoading(false);
+
                             console.log("onSuccess", ctx);
+                            // if (registerResponse?.error) {
+                            setError({ error: true, message: registerResponse.error });
+
+                            // } else {
+                            toast({
+                                variant: "success",
+                                title: "Success",
+                                description: "User registered successfully",
+                                action: <ToastAction altText="Try Again">Try again</ToastAction>,
+                            });
+                            setLoading(false);
+                            // }
+
                         },
                         onError: (ctx) => {
                             if (ctx) {
@@ -92,6 +105,13 @@ export default function RegisterForm() {
                                     error: true,
                                     message: ctx.error.message
                                 })
+                                toast({
+                                    variant: "destructive",
+                                    title: "error",
+                                    description: "User registered Failed " + registerResponse.error,
+                                    // action: <ToastAction altText="Try Again">Try again</ToastAction>,
+                                });
+                                setLoading(false);
                             }
                         },
                     }
