@@ -42,7 +42,7 @@ export default function LoginForm(props) {
     e.preventDefault(); // prevent page refresh
     const isValid = validateForm();
     if (isValid) {
-      loading(true);
+      setLoading(true);
       await signIn.email({
         email, password,
       },

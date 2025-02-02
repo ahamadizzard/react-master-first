@@ -102,7 +102,8 @@ export default function AddMovieForm() {
                     </div>
                     <div>
                         <Label htmlFor="year" className="font-bold">Movie Year</Label>
-                        <Input id="year" placeholder="Enter the year of the movie" name="year" />
+                        <Input type="number" min="1900" max={new Date().getFullYear()} step="1" id="year" placeholder="Enter the year of the movie" name="year" />
+                        {/* <p className="text-red-500" id="year-error" >Please enter a year between 1900 and {new Date().getFullYear()}.</p> */}
                     </div>
                     <div>
                         <Label htmlFor="plot" className="font-bold">Movie Plot</Label>
