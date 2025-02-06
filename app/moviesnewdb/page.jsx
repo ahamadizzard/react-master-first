@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Eye, LayoutDashboard } from "lucide-react";
+import Link from "next/link";
 import {
     Card,
     CardContent,
@@ -8,12 +9,13 @@ import {
     CardTitle,
     CardFooter,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { getMovies } from "@/lib/apis/server";
+import { getMovies, getMoviesNewDB } from "@/lib/apis/server";
 import Image from "next/image";
 
 
-export default async function DashboardPage() {
+export default async function MoviesPublicPage() {
     // 1. Add shadcn card component
     // 2. Create Movies GET endpoint
     // 3. Read a dummy response
@@ -24,12 +26,16 @@ export default async function DashboardPage() {
     //     headers: await headers(),
     // });
     // console.log("session: ", session);
-    const moviesQuery = await getMovies();
+    const moviesQuery = await getMoviesNewDB();
 
     return (
-        <div className="">
-
-            <h1 className="text-2xl font-bold mb-3">Movies</h1>
+        <div className=" flex-1 my-2 h-screen overflow-y-scroll p-8">
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-blue-900 text-2xl font-bold mb-3">Movies</h1>
+                <Link href="/dashboard/moviesnewdb">
+                    <Button className="bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"> <LayoutDashboard />Go to Dashboard</Button>
+                </Link>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
 
 
@@ -47,7 +53,7 @@ export default async function DashboardPage() {
                                 {moviesQuery?.id}
                                 <card className="h-full flex flex-col">
                                     <CardHeader>
-                                        <CardTitle className="text-neutral-700 hover:text-blue-500">
+                                        <CardTitle className="text-blue-900 hover:text-white">
                                             {moviesQuery?.title} {`(${moviesQuery?.year ?? "N/A"})`}
                                         </CardTitle>
                                     </CardHeader>

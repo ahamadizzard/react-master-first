@@ -10,12 +10,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { MultiSelect } from "@/components/multi-select";
 import { GENRES } from "@/lib/constants";
 import { RATINGS } from "@/lib/constants";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectLabel, SelectItem } from "@/components/ui/select";
-import { Card, CardContent, CardFooter, CardBody, CardHeader, CardDescription, CardTitle } from "@/components/ui/card";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { Card, CardContent, CardFooter, CardHeader, CardDescription, CardTitle } from "@/components/ui/card";
 import { createMovie } from "@/lib/actions/movie";
-import { useRouter } from "next/router";
+
 import { useToast } from "@/hooks/use-toast";
-import { ToastAction } from "@/components/ui/toast";
+
 
 const DEFAULT_ERROR = {
     error: false,
@@ -26,7 +26,7 @@ export default function AddMovieForm() {
     const [genres, setGenres] = react.useState([]);
     const [rated, setRated] = react.useState("");
     const [isLoading, setIsLoading] = react.useState(false);
-    const [clearGenres, setClearGenres] = react.useState(false);
+    // const [clearGenres, setClearGenres] = react.useState(false);
     const { toast } = useToast();
     const genresList = GENRES.map((genre) => ({
         label: genre,
@@ -41,19 +41,32 @@ export default function AddMovieForm() {
         const poster = formData.get("poster")?.toString();
         const year = Number(formData.get("year"));
         const plot = formData.get("plot")?.toString();
+        const imdbrating = formData.get("imdbrating").toString();
 
         if (title && year && plot && rated && genres) {
             try {
                 // console.log(title, year, plot, genres, rated);
                 setError(DEFAULT_ERROR);
                 setIsLoading(true);
-                await createMovie({ title, year, plot, genres, rated, poster });
-                toast({
-                    variant: "success",
-                    title: "Success",
-                    description: "Movie Added successfully",
-                    // action: <ToastAction altText="Try Again">Try again</ToastAction>,
-                });
+                const resp = await createMovie({ title, year, plot, genres, rated, poster, imdbrating });
+                if (resp.success) {
+
+                    toast({
+                        variant: "success",
+                        title: "Success",
+                        description: "Movie Added successfully",
+                        // action: <ToastAction altText="Try Again">Try again</ToastAction>,
+                    });
+                    // router.push("/moviesnewdb");
+                } else {
+                    toast({
+                        variant: "destructive",
+                        title: "error",
+                        description: "Adding Movie Failed " + response.error,
+                        // action: <ToastAction altText="Try Again">Try again</ToastAction>,
+                    });
+                    setIsLoading(false);
+                }
                 console.log("Saving movie Response Data: ", response);
                 setError(DEFAULT_ERROR);
                 setIsLoading(false);
@@ -118,6 +131,11 @@ export default function AddMovieForm() {
                             placeholder={"Select the genres of the movie"}
                             onValueChange={setGenres}
                         />
+                    </div>
+                    <div>
+                        <Label htmlFor="imdbrating" className="font-bold">IMDB Rating</Label>
+                        <Input type="number" step="any" min="1" max="10" id="imdbrating" placeholder="Enter the IMDB rating of the movie" name="imdbrating" />
+                        {/* <p className="text-red-500" id="year-error" >Please enter a year between 1900 and {new Date().getFullYear()}.</p> */}
                     </div>
                     <div>
                         <label className="text-blue-900 " htmlFor="rated">Movie Rating</label>

@@ -28,7 +28,7 @@ const items = [
         icon: List,
     },
     {
-        title: "Movies New Database",
+        title: "Edit Movies",
         url: "/dashboard/moviesnewdb",
         icon: List,
     },
@@ -71,7 +71,7 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <Separator className="bg-blue-300" />
-                <SidebarGroup>
+                {/* <SidebarGroup>
                     <SidebarGroupLabel>Settings</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
@@ -102,7 +102,7 @@ export function AppSidebar() {
                             </SidebarMenuItem>
                         </SidebarMenu>
                     </SidebarGroupContent>
-                </SidebarGroup>
+                </SidebarGroup> */}
 
             </SidebarContent>
         </Sidebar>

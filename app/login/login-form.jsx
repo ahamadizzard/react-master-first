@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { signIn } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import { Loader2 } from "lucide-react";
+// import Router from "react";
+// import router from "next/router";
 
 
 
@@ -48,15 +50,18 @@ export default function LoginForm(props) {
       },
         {
           onSuccess: () => {
+            redirect("/dashboard");
             setLoading(false);
-            Router.push("/dashboard");
+            // router.push("/dashboard");
           },
           onError: (ctx) => {
             if (ctx) {
               setError({
                 error: true,
                 message: ctx.error.message
+
               })
+              setLoading(false)
             }
           }
         }
@@ -153,7 +158,7 @@ export default function LoginForm(props) {
           <div>
             <button
               type="submit" disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm px-5 py-2.5 text-center"
+              className="w-full flex justify-center items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm px-5 py-2.5 text-center"
             >
               {loading && < Loader2 className="animate-spin" />}
               Sign in
