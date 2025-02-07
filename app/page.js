@@ -10,7 +10,7 @@ export default function Home() {
       <section className="hero min-h-screen flex flex-col bg-blue-300 items-center justify-center text-center p-8">
         <div className="flex justify-center mb-3 w-full max-w-5xl">
           <Image
-            src="/images/Hero.jpg"
+            src="/images/Learn.jpg"
             alt="Hero Image"
             width={800}
             height={450}
