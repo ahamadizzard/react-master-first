@@ -18,22 +18,25 @@ export default function UsersList() {
     }, []);
 
     return (
-        <div>
-            <div className="container mx-auto p-4 ">
+        <div className="container mx-auto p-4">
+            <div className="flex flex-col justify-center mx-auto p-4 ">
 
-                <h1 className="text-2xl font-bold mb-4">Users List</h1>
+                <h1 className="text-2xl text-center font-bold mb-4">Users List</h1>
                 {isLoading ? (
                     <p>Loading Users...</p>
                 ) : users.length === 0 ? (
                     <p>No Users found</p>
                 ) : (
+                    // display in the middle
+
+
                     <table className="bg-white border border-gray-200 ">
                         <thead>
                             <tr className="bg-gray-100">
-                                <th className="py-2 px-4 border">Name</th>
-                                <th className="py-2 px-4 border">Email</th>
-                                <th className="py-2 px-4 border">Email Verified</th>
-                                <th className="py-2 px-4 border text-start">Edit / Delete User</th>
+                                <th className="py-2 px-4 w-40 border">Name</th>
+                                <th className="py-2 px-4 w-40 border">Email</th>
+                                <th className="py-2 px-4 w-40 border">Email Verified</th>
+                                <th className="py-2 px-4 w-40 border text-end">Edit / Delete User</th>
 
                             </tr>
                         </thead>
@@ -43,8 +46,8 @@ export default function UsersList() {
                                     <td className="py-2 px-4">{user.name}</td>
                                     <td className="py-2 px-4">{user.email}</td>
                                     <td className="py-2 px-4">{user.emailVerified ? "✅" : "❌"}</td>
-                                    <td className="py-2 px-4 ">
-                                        <div className="flex flex-row items-end gap-2">
+                                    <td className="py-2 px-4  flex justify-end">
+                                        <div className="flex flex-row gap-2">
                                             <div className="flex items-center">
                                                 <button className="bg-blue-500 flex w-24 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" onClick={() => handleEdit(user._id)}> <NotebookPen /> &nbsp; Edit</button>
                                             </div>

@@ -1,4 +1,4 @@
-import { List, Home, User, Settings, Calendar, BadgePlus, Pencil } from "lucide-react"
+import { Clapperboard, Home, User, Settings, Calendar, FileVideo2, FileVideo } from "lucide-react"
 import { UserNav } from "@/app/dashboard/components/user-nav"
 import { Separator } from "@/components/ui/separator";
 import {
@@ -25,17 +25,17 @@ const items = [
     {
         title: "Movies Old Database",
         url: "/dashboard/movies",
-        icon: List,
+        icon: Clapperboard,
     },
     {
         title: "Edit Movies",
         url: "/dashboard/moviesnewdb",
-        icon: List,
+        icon: FileVideo2,
     },
     {
         title: "Add Movies",
         url: "/dashboard/add-movie",
-        icon: Calendar,
+        icon: FileVideo,
     },
     {
         title: "User",

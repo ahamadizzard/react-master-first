@@ -48,10 +48,10 @@ export default async function MoviesPublicPage() {
                             <div
 
                                 key={moviesQuery?._id}
-                                className="h-full bg-blue-300 rounded-lg shadow-md p-1 transition-transform duration-300 ease-in-out hover:scale-105 "
+                                className="h-full  "
                             >
                                 {moviesQuery?.id}
-                                <card className="h-full flex flex-col">
+                                <Card className="h-full flex flex-col bg-blue-300 rounded-lg shadow-md p-1 transition-transform duration-300 ease-in-out hover:scale-105">
                                     <CardHeader>
                                         <CardTitle className="text-blue-900 hover:text-white">
                                             {moviesQuery?.title} {`(${moviesQuery?.year ?? "N/A"})`}
@@ -98,7 +98,7 @@ export default async function MoviesPublicPage() {
                                         </Badge>
 
                                     </CardFooter>
-                                </card>
+                                </Card>
                             </div>
                         )
                     )}
