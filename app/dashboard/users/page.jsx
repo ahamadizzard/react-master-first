@@ -28,8 +28,6 @@ export default function UsersList() {
                     <p>No Users found</p>
                 ) : (
                     // display in the middle
-
-
                     <table className="bg-white border border-gray-200 ">
                         <thead>
                             <tr className="bg-gray-100">
@@ -37,7 +35,6 @@ export default function UsersList() {
                                 <th className="py-2 px-4 w-40 border">Email</th>
                                 <th className="py-2 px-4 w-40 border">Email Verified</th>
                                 <th className="py-2 px-4 w-40 border text-end">Edit / Delete User</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -62,14 +59,6 @@ export default function UsersList() {
                     </table>
                 )}
             </div>
-            {/* <h1>Users List</h1>
-            <ul>
-                {users.map((user) => (
-                    <li key={user._id}>
-                        {user.name} ({user.email}) {user.emailVerified ? "✅" : "❌"}
-                    </li>
-                ))}
-            </ul> */}
         </div>
     );
 }

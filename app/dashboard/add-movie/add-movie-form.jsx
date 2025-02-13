@@ -23,11 +23,11 @@ const DEFAULT_ERROR = {
 };
 export default function AddMovieForm() {
     const [error, setError] = useState(DEFAULT_ERROR);
-    const [genres, setGenres] = react.useState([]);
-    const [rated, setRated] = react.useState("");
-    const [isLoading, setIsLoading] = react.useState(false);
-    // const [clearGenres, setClearGenres] = react.useState(false);
+    const [genres, setGenres] = useState([]);
+    const [rated, setRated] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const { toast } = useToast();
+
     const genresList = GENRES.map((genre) => ({
         label: genre,
         value: genre,
@@ -41,14 +41,14 @@ export default function AddMovieForm() {
         const poster = formData.get("poster")?.toString();
         const year = Number(formData.get("year"));
         const plot = formData.get("plot")?.toString();
-        const imdbrating = formData.get("imdbrating").toString();
+        const imdbrating = Number(formData.get("imdbrating"));
 
         if (title && year && plot && rated && genres) {
             try {
-                // console.log(title, year, plot, genres, rated);
                 setError(DEFAULT_ERROR);
                 setIsLoading(true);
                 const resp = await createMovie({ title, year, plot, genres, rated, poster, imdbrating });
+                setIsLoading(false);
                 if (resp.success) {
 
                     toast({
@@ -57,7 +57,6 @@ export default function AddMovieForm() {
                         description: "Movie Added successfully",
                         // action: <ToastAction altText="Try Again">Try again</ToastAction>,
                     });
-                    // router.push("/moviesnewdb");
                 } else {
                     toast({
                         variant: "destructive",
@@ -65,17 +64,15 @@ export default function AddMovieForm() {
                         description: "Adding Movie Failed " + response.error,
                         // action: <ToastAction altText="Try Again">Try again</ToastAction>,
                     });
-                    setIsLoading(false);
+
                 }
                 console.log("Saving movie Response Data: ", response);
                 setError(DEFAULT_ERROR);
-                setIsLoading(false);
-                router.push("/moviesnewdb");
-                window.location.reload();
-
+                // setIsLoading(false);
+                // router.push("/moviesnewdb");
+                // window.location.reload();
             }
             catch (error) {
-                // setError("An unexpected error occurred. Please try again.");
                 toast({
                     variant: "destructive",
                     title: "error",
@@ -95,13 +92,9 @@ export default function AddMovieForm() {
     const clearGenreList = () => {
         window.location.reload();
     };
-
-    // setIsLoading(false);
-
-
     return (
         <Card className="max-w-2xl mx-auto rounded-t-3xl shadow-lg">
-            <CardHeader className="flex flex-col rounded-t-3xl bg-blue-200">
+            <CardHeader className="flex flex-col rounded-t-3xl bg-blue-400">
                 <CardTitle className="text-2xl text-blue-900">Add Movie</CardTitle>
                 <CardDescription className="text-sm font-bold text-blue-900">
                     Add a Movie to the MFlix Database
@@ -116,26 +109,31 @@ export default function AddMovieForm() {
                     <div>
                         <Label htmlFor="year" className="font-bold">Movie Year</Label>
                         <Input type="number" min="1900" max={new Date().getFullYear()} step="1" id="year" placeholder="Enter the year of the movie" name="year" />
-                        {/* <p className="text-red-500" id="year-error" >Please enter a year between 1900 and {new Date().getFullYear()}.</p> */}
                     </div>
                     <div>
                         <Label htmlFor="plot" className="font-bold">Movie Plot</Label>
-                        <Textarea id="plot" placeholder="Enter the plot of the movie" name="plot">
-
-                        </Textarea>
+                        <Textarea id="plot" placeholder="Enter the plot of the movie" name="plot"></Textarea>
                     </div>
                     <div>
                         <Label htmlFor="genres" className="font-bold">Movie Genres</Label>
                         <MultiSelect
                             list={genresList}
                             placeholder={"Select the genres of the movie"}
+                            selectedItems={genres}
                             onValueChange={setGenres}
                         />
                     </div>
                     <div>
                         <Label htmlFor="imdbrating" className="font-bold">IMDB Rating</Label>
-                        <Input type="number" step="any" min="1" max="10" id="imdbrating" placeholder="Enter the IMDB rating of the movie" name="imdbrating" />
-                        {/* <p className="text-red-500" id="year-error" >Please enter a year between 1900 and {new Date().getFullYear()}.</p> */}
+                        <Input
+                            type="number"
+                            step="0.1"
+                            min="1"
+                            max="10"
+                            id="imdbrating"
+                            placeholder="Enter the IMDB rating of the movie"
+                            name="imdbrating"
+                        />
                     </div>
                     <div>
                         <label className="text-blue-900 " htmlFor="rated">Movie Rating</label>
@@ -150,7 +148,6 @@ export default function AddMovieForm() {
                                     </SelectItem>
                                 ))}
                             </SelectContent>
-
                         </Select>
                     </div>
                     <div>

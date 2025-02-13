@@ -1,5 +1,5 @@
 import { Clapperboard, Home, User, Settings, Calendar, FileVideo2, FileVideo } from "lucide-react"
-import { UserNav } from "@/app/dashboard/components/user-nav"
+// import { UserNav } from "@/app/dashboard/components/user-nav"
 import { Separator } from "@/components/ui/separator";
 import {
     Sidebar,
@@ -10,9 +10,8 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarMenuSub,
-    SidebarMenuSubItem, SidebarMenuSubTrigger, SideBarMenuSubContent, SidebarMenuBadge, SidebarMenuSkeleton
-
+    // SidebarMenuSub,
+    // SidebarMenuSubItem, SidebarMenuSubTrigger, SideBarMenuSubContent, SidebarMenuBadge, SidebarMenuSkeleton
 } from "@/components/ui/sidebar"
 
 // Menu items.
@@ -71,39 +70,6 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <Separator className="bg-blue-300" />
-                {/* <SidebarGroup>
-                    <SidebarGroupLabel>Settings</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <SidebarMenuItem>
-                                <p className="font-bold text-l"> Handle Movies Database </p>
-                                <SidebarMenuSub asChild >
-
-                                    <SidebarMenuSubItem >
-                                        <a className="hover:bg-blue-300 hover:animate-pulse rounded-md italic flex items-center gap-2 mb-2 mt-2" href="/dashboard/movieslist">
-                                            <Pencil />
-                                            <span>View Modify / Delete Movies</span>
-                                        </a>
-                                    </SidebarMenuSubItem>
-                                    <SidebarMenuSubItem>
-                                        <a className="hover:bg-blue-300 hover:animate-pulse rounded-md italic flex items-center gap-2 mb-2 mt-2" href="/dashboard/add-movie">
-                                            <BadgePlus />
-                                            <span>Add Movie</span>
-                                        </a>
-                                    </SidebarMenuSubItem>
-
-                                    <SidebarMenuSubItem >
-                                        <a className="hover:bg-blue-300 hover:animate-pulse rounded-md italic flex items-center gap-2 mb-2 mt-2" href="/dashboard/add-movie">
-                                            <Settings />
-                                            <span>Add Movie</span>
-                                        </a>
-                                    </SidebarMenuSubItem>
-                                </SidebarMenuSub>
-                            </SidebarMenuItem>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup> */}
-
             </SidebarContent>
         </Sidebar>
     )

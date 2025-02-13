@@ -14,7 +14,7 @@ import { LogOut, Settings, User } from "lucide-react";
 import { redirect } from "next/navigation";
 export default function UserNav() {
     const { data: session } = useSession();
-    console.log("Session: ", session);
+    // console.log("Session: ", session);
 
     const handleLogout = async () => {
         await signOut({
@@ -48,7 +48,6 @@ export default function UserNav() {
                             {session?.user?.email}
                         </p>
                     </div>
-
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup >
@@ -66,7 +65,6 @@ export default function UserNav() {
                     <LogOut className="mr-2 h-4 w-4 text-primary-400" />
                     <span>LogOut</span>
                 </DropdownMenuItem>
-
             </DropdownMenuContent>
         </DropdownMenu >
     );

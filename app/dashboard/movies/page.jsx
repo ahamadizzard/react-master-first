@@ -28,19 +28,14 @@ export default async function DashboardPage() {
 
     return (
         <div className="">
-
             <h1 className="text-2xl font-bold mb-3">Movies</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-
-
-
                 {moviesQuery?.length &&
                     moviesQuery?.map(
                         (
                             moviesQuery // for each loop can also be used here
                         ) => (
                             <div
-
                                 key={moviesQuery?._id}
                                 className="h-full "
                             >
@@ -97,7 +92,6 @@ export default async function DashboardPage() {
                         )
                     )}
             </div>
-            {/* <h1>Movies section ends here</h1> */}
         </div >
     );
 }

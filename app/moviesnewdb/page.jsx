@@ -37,16 +37,12 @@ export default async function MoviesPublicPage() {
                 </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-
-
-
                 {moviesQuery?.length &&
                     moviesQuery?.map(
                         (
                             moviesQuery // for each loop can also be used here
                         ) => (
                             <div
-
                                 key={moviesQuery?._id}
                                 className="h-full  "
                             >
@@ -69,8 +65,6 @@ export default async function MoviesPublicPage() {
                                                     width={200}
                                                     height={400}
                                                     priority={true}
-                                                // onError={() => setImageSrc("@/public/images/notfound.png")}
-                                                // onError={handleImageError}
                                                 />)}
                                         </div>
 
@@ -91,19 +85,17 @@ export default async function MoviesPublicPage() {
                                             Rating: {moviesQuery?.rated ?? "N/A"}
                                         </Badge>
                                         <Badge variant="destructive">
-                                            IMDB: {moviesQuery?.imdb?.rating || "N/A"}
+                                            IMDB: {moviesQuery?.imdbrating || "N/A"}
                                         </Badge>
                                         <Badge variant="success">
-                                            {moviesQuery?.type || "Unknown"}
+                                            {moviesQuery?.rated || "Unknown"}
                                         </Badge>
-
                                     </CardFooter>
                                 </Card>
                             </div>
                         )
                     )}
             </div>
-            {/* <h1>Movies section ends here</h1> */}
         </div >
     );
 }

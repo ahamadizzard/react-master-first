@@ -15,14 +15,14 @@ import {
     ComboboxCancel
 } from "@/components/ui/combobox";
 
-export function MultiSelect({ list, label, placeholder, onValueChange }) {
-    const [value, setValue] = useState([]);
+export function MultiSelect({ list, label, placeholder, selectedItems, onValueChange }) {
+    // const [value, setValue] = useState([]);
 
     return (
         <Combobox
-            value={value}
+            value={selectedItems}
             onValueChange={(val) => {
-                setValue(val);
+                // setValue(val);
                 onValueChange(val);
             }}
             className="w-full"
@@ -30,7 +30,7 @@ export function MultiSelect({ list, label, placeholder, onValueChange }) {
             {label && <ComboboxLabel>{label}</ComboboxLabel>}
             <ComboboxAnchor className="h-full min-h-10 flex-wrap px-3 py-2">
                 <ComboboxBadgeList>
-                    {value.map((item) => {
+                    {selectedItems.map((item) => {
                         const option = list.find((trick) => trick.value === item); // find the option that matches the value
                         if (!option) return null;
 

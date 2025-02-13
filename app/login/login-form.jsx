@@ -1,12 +1,7 @@
 import React, { useState } from "react";
-// import { loginUser } from "@/lib/apis/server";
 import { signIn } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import { Loader2 } from "lucide-react";
-// import Router from "react";
-// import router from "next/router";
-
-
 
 const DEFAULT_ERROR = {
   error: false,
@@ -52,7 +47,6 @@ export default function LoginForm(props) {
           onSuccess: () => {
             redirect("/dashboard");
             setLoading(false);
-            // router.push("/dashboard");
           },
           onError: (ctx) => {
             if (ctx) {
@@ -73,7 +67,6 @@ export default function LoginForm(props) {
     <div className="max-w-md w-full mx-auto rounded-lg px-6 py-8 sm:px-8 lg:px-10">
       <div className="bg-white shadow-md rounded-lg p-6 sm:p-8 border border-gray-200">
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Title */}
           <h3 className="text-blue-600 text-xl font-semibold mb-4 text-center justify-center sm:text-left">
             {props.title}
           </h3>

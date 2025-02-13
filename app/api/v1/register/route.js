@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import clientPromise from "@/lib/mongodb";
+import { db } from "@/lib/mongodb";
 import bcrypt from "bcrypt";
 
 export const POST = async (req) => {
   try {
     const { name, email, password } = await req.json();
-    // console.log("Login Data arrived at route.js. - ", name, email, password);
 
     //backend validation
     if (!name || !email || !password) {
@@ -20,8 +19,8 @@ export const POST = async (req) => {
     //TODO: you can add further validations here
 
     // Bind Database
-    const client = await clientPromise();
-    const db = client.db("sample_mflix");
+    // const client = await clientPromise();
+    // const db = await client.db("sample_mflix");
 
     // Find the user in the database
     const isExistingUser = await db.collection("users").findOne({ email }); // email is the key and value is the email from the request
@@ -36,8 +35,7 @@ export const POST = async (req) => {
       );
     } else {
       const hashedPassword = await bcrypt.hash(password, 10);
-      //   console.log("encrypted password: ", hashedPassword);
-      //   Insert the user into the database
+
       const result = await db.collection("users").insertOne({
         name,
         email,

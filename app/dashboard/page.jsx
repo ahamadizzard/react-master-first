@@ -49,18 +49,6 @@ function DashboardPage() {
                         <p>Card Footer</p>
                     </CardFooter>
                 </Card>
-
-
-                {/* <div className='flex items-center bg-amber-600 justify-between gap-2 border-b px-6 shadow-sm h-48 w-80 rounded-lg'>
-                    <h1>Total Movies</h1>
-                </div>
-                <div className='flex items-center bg-blue-400 justify-between gap-2 border-b px-6 shadow-sm h-48 w-80 rounded-lg'>
-                    <h1>Dashboard</h1>
-                </div>
-                <div className='flex items-center bg-green-200 justify-between gap-2 border-b px-6 shadow-sm h-48 w-80 rounded-lg'>
-                    <h1>Dashboard</h1>
-                </div> */}
-
             </div>
             <div>
                 dashboard

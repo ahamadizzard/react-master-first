@@ -1,15 +1,9 @@
-
-// import { getMoviesNewDB } from "@/lib/apis/server";
 import MovieTable from "./movie-table";
-import clientPromise from "@/lib/mongodb";
-//Movie Data Server Component
-// Server action to call the database directly
+import { db } from "@/lib/mongodb";
 
+// Movie Data Server Component
 export default async function MovieData() {
     try {
-        const client = await clientPromise();
-        const db = client.db("sample_mflix");
-
         const movieQuery = await db
             .collection("movies_n")
             .find({})
@@ -17,9 +11,10 @@ export default async function MovieData() {
             .limit(50)
             .toArray();
 
-        if (movieQuery) {
-            //refine movies query to an array
-            const refineMovies = movieQuery.map((movie) => (({
+        // Check if movieQuery is not empty
+        if (movieQuery && movieQuery.length > 0) {
+            // Refine movies query to an array
+            const refineMovies = movieQuery.map((movie) => ({
                 id: movie._id.toString(),
                 title: movie.title,
                 year: movie.year,
@@ -28,18 +23,26 @@ export default async function MovieData() {
                 imdbrating: movie.imdbrating,
                 poster: movie.poster,
                 plot: movie.plot,
-            })))
-            //Pass movie data to the movies table
-            // Return MovieTable
-            return <MovieTable movies={refineMovies} />
+            }));
+
+            // Pass movie data to the movies table
+            return <MovieTable movies={refineMovies} />;
+        } else {
+            // Return a message if no movies are found
+            return (
+                <div className="flex justify-center items-center h-[186.5px]">
+                    <p className="text-gray-500 font-medium">No Movies Available</p>
+                </div>
+            );
         }
     } catch (error) {
-        // console.log(error);
+        console.error(error);
 
+        // Return an error message if something goes wrong
         return (
             <div className="flex justify-center items-center h-[186.5px]">
-                <p className="text-red-500 font-medium animate-pulse duration-1000">No Movies Available</p>
+                <p className="text-red-500 font-medium animate-pulse duration-1000">Error fetching movies. Please try again later.</p>
             </div>
-        )
+        );
     }
 }

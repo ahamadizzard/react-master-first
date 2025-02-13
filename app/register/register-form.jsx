@@ -13,9 +13,6 @@ import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-// import { stringify } from "postcss";
-// import { stringifyError } from "next/dist/shared/lib/utils";
-// import { registerUser } from "@/lib/apis/server";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { signUp } from "@/lib/auth-client";
@@ -38,40 +35,13 @@ export default function RegisterForm() {
         const email = formData.get("email").toString();
         const password = formData.get("password").toString();
         const confirmPassword = formData.get("confirmPassword") ?? "";
-        // const data = {
-        //     name,
-        //     email,
-        //     password
-        // };
 
         //Basic Validation logic
         if (name && email && password && confirmPassword) {
             if (password === confirmPassword) {
                 setError(DEFAULT_ERROR); // reset the error message
                 setLoading(true);
-                // const registerResponse = await registerUser({ name, email, password }); // call the registerUser function from the server
-                // setLoading(false);
-                // if (registerResponse?.error) {
-                //     setError({ error: true, message: registerResponse.error });
-                //     toast({
-                //         variant: "destructive",
-                //         title: "error",
-                //         description: "User registered Failed " + registerResponse.error,
-                //         // action: <ToastAction altText="Try Again">Try again</ToastAction>,
-                //     });
-                // } else {
-                //     toast({
-                //         variant: "success",
-                //         title: "Success",
-                //         description: "User registered successfully",
-                //         // action: <ToastAction altText="Try Again">Try again</ToastAction>,
-                //     });
-                //     // clear the texts in the UI
-                //     // event?.currentTarget.reset();
-                //     // refresh the ui
-                //     window.location.reload();
 
-                // }
                 const { data, error } = await signUp.email({
                     email: email,
                     password: password,
@@ -83,8 +53,7 @@ export default function RegisterForm() {
                             //console.log("onRequest",ctx);
                         },
                         onSuccess: (ctx) => {
-
-                            console.log("onSuccess", ctx);
+                            // console.log("onSuccess", ctx);
                             // if (registerResponse?.error) {
                             setError({ error: true, message: registerResponse.error });
 
@@ -126,7 +95,6 @@ export default function RegisterForm() {
                 });
             }
         }
-        // console.log("Error Data: " + stringifyError(error));
     };
     return (
         <main>

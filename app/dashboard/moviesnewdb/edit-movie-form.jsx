@@ -23,7 +23,7 @@ const DEFAULT_ERROR = {
     message: "Movie added successfully",
 };
 
-export default function EditMovieForm({ movie, open, onCancel, isLoading }) {
+export default function EditMovieForm({ movie, open, onSubmit, onCancel, isLoading }) {
 
     const [error, setError] = useState(DEFAULT_ERROR);
     const [title, setTitle] = react.useState(movie?.title);
@@ -32,8 +32,8 @@ export default function EditMovieForm({ movie, open, onCancel, isLoading }) {
     const [genres, setGenres] = react.useState(movie?.genres);
     const [rated, setRated] = react.useState(movie?.rated);
     const [poster, setPoster] = react.useState(movie?.poster);
-    const [imdbrating, setImdbRating] = react.useState(movie?.imdbrating ?? 0);
-    // const [rated, setRated] = react.useState("");
+    const [imdbrating, setImdbRating] = react.useState(movie?.imdbrating);
+
     // const [isLoading, setIsLoading] = react.useState(false);
     // const [clearGenres, setClearGenres] = react.useState(false);
     const { toast } = useToast();
@@ -42,10 +42,19 @@ export default function EditMovieForm({ movie, open, onCancel, isLoading }) {
         value: genre,
     }));
     const handleSubmitForm = async (e) => {
-        //code here
+        e.preventDefault();
+        //Save changes to the database
+        // onSubmit({ ...movie, title, year, genres, poster, rated, plot, imdbrating: { rating: imdbrating } });
+        onSubmit({ ...movie, title, year, genres, poster, rated, plot, imdbrating: imdbrating });
     }
     const clearGenreList = () => {
-        window.location.reload();
+        setTitle("");
+        setYear("");
+        setPlot("");
+        setGenres([]);
+        setRated("");
+        setPoster("");
+        setImdbRating(0);
     };
     return (
         <div>
@@ -59,7 +68,6 @@ export default function EditMovieForm({ movie, open, onCancel, isLoading }) {
                         </DialogDescription>
                     </DialogHeader>
 
-                    {/* onSubmit={handleSubmitForm} */}
                     <form onSubmit={handleSubmitForm}>
                         <div className="space-y-4 text-blue-900">
                             <div>
@@ -81,7 +89,6 @@ export default function EditMovieForm({ movie, open, onCancel, isLoading }) {
                                     value={year}
                                     id="year"
                                     placeholder="Enter the year of the movie" name="year" />
-
                             </div>
                             <div>
                                 <Label htmlFor="plot" className="font-bold">Movie Plot</Label>
@@ -91,7 +98,6 @@ export default function EditMovieForm({ movie, open, onCancel, isLoading }) {
                                     value={plot}
                                     placeholder="Enter the plot of the movie"
                                     name="plot">
-
                                 </Textarea>
                             </div>
                             <div>
@@ -99,25 +105,23 @@ export default function EditMovieForm({ movie, open, onCancel, isLoading }) {
                                 <MultiSelect
                                     list={genresList}
                                     value={genres}
-                                    id="genres"
                                     onChange={(val) => setGenres(val)}
                                     placeholder={"Select the genres of the movie"}
                                     onValueChange={setGenres}
+                                    selectedItems={genres}
                                 />
                             </div>
                             <div>
                                 <Label htmlFor="imdbrating" className="font-bold">IMDB Rating</Label>
                                 <Input
                                     type="number"
-                                    step="any"
-                                    min="1" max="10"
+                                    step="0.1" min="1" max="10"
                                     id="imdbrating"
                                     placeholder="Enter the IMDB rating of the movie"
                                     name="imdbrating"
-                                    value={imdbrating}
-                                    onChange={(e) => setImdbRating(Number(e.target.value))}
+                                    value={imdbrating} //controlled input
+                                    onChange={(e) => setImdbRating(Number(e.target.value))} //controlled input
                                 />
-                                {/* <p className="text-red-500" id="year-error" >Please enter a year between 1900 and {new Date().getFullYear()}.</p> */}
                             </div>
                             <div>
                                 <label className="text-blue-900 " htmlFor="rated">Movie Rating</label>
@@ -135,7 +139,6 @@ export default function EditMovieForm({ movie, open, onCancel, isLoading }) {
                                             </SelectItem>
                                         ))}
                                     </SelectContent>
-
                                 </Select>
                             </div>
                             <div>
@@ -162,7 +165,6 @@ export default function EditMovieForm({ movie, open, onCancel, isLoading }) {
                                 <span className="text-red-500 text-sm">{error.message}</span>
                             )}
                         </div>
-
                     </form>
                 </DialogContent>
             </Dialog>
