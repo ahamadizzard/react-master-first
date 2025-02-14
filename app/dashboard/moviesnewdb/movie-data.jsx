@@ -36,7 +36,7 @@ export default async function MovieData() {
             );
         }
     } catch (error) {
-        console.error(error);
+        console.log(error);
 
         // Return an error message if something goes wrong
         return (

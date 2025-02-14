@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import React from "react";
+
 import { Eye, Shell } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -30,7 +30,7 @@ export default async function DashboardPage() {
     //     headers: await headers(),
     // });
     // console.log("session: ", session);
-    const moviesQuery = await getMoviesNewDB();
+    // const moviesQuery = await getMoviesNewDB();
 
     return (
         <div className="">

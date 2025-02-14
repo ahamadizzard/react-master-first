@@ -32,7 +32,7 @@ export default function EditMovieForm({ movie, open, onSubmit, onCancel, isLoadi
     const [genres, setGenres] = react.useState(movie?.genres);
     const [rated, setRated] = react.useState(movie?.rated);
     const [poster, setPoster] = react.useState(movie?.poster);
-    const [imdbrating, setImdbRating] = react.useState(movie?.imdbrating);
+    const [imdbrating, setImdbRating] = react.useState(movie?.imdbrating || 0);
 
     // const [isLoading, setIsLoading] = react.useState(false);
     // const [clearGenres, setClearGenres] = react.useState(false);
@@ -45,7 +45,7 @@ export default function EditMovieForm({ movie, open, onSubmit, onCancel, isLoadi
         e.preventDefault();
         //Save changes to the database
         // onSubmit({ ...movie, title, year, genres, poster, rated, plot, imdbrating: { rating: imdbrating } });
-        onSubmit({ ...movie, title, year, genres, poster, rated, plot, imdbrating: imdbrating });
+        onSubmit({ ...movie, title, year, plot, genres, poster, rated, imdbrating: imdbrating });
     }
     const clearGenreList = () => {
         setTitle("");
