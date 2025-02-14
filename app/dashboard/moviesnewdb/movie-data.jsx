@@ -1,6 +1,9 @@
 import MovieTable from "./movie-table";
 import { db } from "@/lib/mongodb";
 
+//next.js will invalidate the cache when a request comes in at most once every 60 seconds
+export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 // Movie Data Server Component
 export default async function MovieData() {
     try {
