@@ -16,8 +16,9 @@ export default function DeleteMovieDialog({ open, movie, onConfirm, onCancel, is
                 <DialogHeader>
                     <DialogTitle>Delete Movie</DialogTitle>
                     <DialogDescription>
-                        Are you sure you want to delete the movie{" "}
-                        <b>{movie?.title || "this movie"}</b>? This action cannot be undone.
+                        Are you sure you want to delete the movie{" "} <br />
+                        <b className="text-red-500 text-lg">{movie?.title || "this movie"} ?</b>
+                        <br />This action cannot be undone.
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
