@@ -33,6 +33,7 @@ export default function RegisterForm() {
         const formData = new FormData(event?.currentTarget);
         const name = formData.get("name").toString();
         const email = formData.get("email").toString();
+        const role = "enduser";
         const password = formData.get("password").toString();
         const confirmPassword = formData.get("confirmPassword") ?? "";
 
@@ -47,6 +48,7 @@ export default function RegisterForm() {
                     password: password,
                     name: name,
                     image: undefined,
+                    role: role,
                 },
                     {
                         onRequest: () => {

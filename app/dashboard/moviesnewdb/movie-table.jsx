@@ -144,6 +144,7 @@
 //         </div>
 //     );
 // }
+
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -175,6 +176,10 @@ export default function MovieTable({ movies }) {
     const [ratedFilter, setRatedFilter] = useState("");
     const router = useRouter();
     let counter = 1;
+
+    // Extract unique genres and rated values for dropdowns
+    const uniqueGenres = [...new Set(movies.flatMap((movie) => movie.genres || []))];
+    const uniqueRated = [...new Set(movies.map((movie) => movie.rated || "").filter(Boolean))];
 
     const handleEdit = (movie) => {
         setEditingMovie(movie);
@@ -210,7 +215,7 @@ export default function MovieTable({ movies }) {
         if (resp.success) {
             setDeletingMovie(null);
             router.refresh();
-        };
+        }
     };
 
     // Filter movies based on search criteria
@@ -234,9 +239,21 @@ export default function MovieTable({ movies }) {
 
     // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // Clear all filters
+    const clearFilters = () => {
+        setSearchQuery("");
+        setYearFilter("");
+        setGenresFilter("");
+        setImdbRatingFilter("");
+        setRatedFilter("");
+        setCurrentPage(1); // Reset to the first page
+    };
+
     return (
         <div>
-            <div className="mb-4 text-end">
+            {/* Search and Filter Inputs */}
+            <div className="mb-4 space-y-4">
                 <input
                     type="text"
                     placeholder="Search by title..."
@@ -252,13 +269,18 @@ export default function MovieTable({ movies }) {
                         onChange={(e) => setYearFilter(e.target.value)}
                         className="p-2 border rounded hover:border-gray-500"
                     />
-                    <input
-                        type="text"
-                        placeholder="Filter by genre..."
+                    <select
                         value={genresFilter}
                         onChange={(e) => setGenresFilter(e.target.value)}
                         className="p-2 border rounded hover:border-gray-500"
-                    />
+                    >
+                        <option value="">All Genres</option>
+                        {uniqueGenres.map((genre) => (
+                            <option key={genre} value={genre}>
+                                {genre}
+                            </option>
+                        ))}
+                    </select>
                     <input
                         type="number"
                         placeholder="Filter by IMDB rating (min)..."
@@ -266,117 +288,142 @@ export default function MovieTable({ movies }) {
                         onChange={(e) => setImdbRatingFilter(e.target.value)}
                         className="p-2 border rounded hover:border-gray-500"
                     />
-                    <input
-                        type="text"
-                        placeholder="Filter by rated..."
+                    <select
                         value={ratedFilter}
                         onChange={(e) => setRatedFilter(e.target.value)}
                         className="p-2 border rounded hover:border-gray-500"
-                    />
-
-
-                </div>
-                <Table className="border">
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead className="font-extrabold text-center">#</TableHead>
-                            <TableHead className="font-extrabold"># Cover</TableHead>
-                            <TableHead className="font-extrabold">Movie Title</TableHead>
-                            <TableHead className="font-extrabold">Year</TableHead>
-                            <TableHead className="font-extrabold">Rated</TableHead>
-                            <TableHead className="font-extrabold">IMDB Rating</TableHead>
-                            <TableHead className="font-extrabold">Plot</TableHead>
-                            <TableHead className="font-extrabold">Genres</TableHead>
-                            <TableHead className="font-extrabold text-center">Actions</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {currentMovies.map((movie) => (
-                            <TableRow key={movie.id}>
-                                <TableCell className="text-center">{counter++}</TableCell>
-                                <TableCell className="text-center">
-                                    {movie.poster ? (
-                                        <Image
-                                            src={movie.poster}
-                                            alt={movie.title || "Movie Poster"}
-                                            width={75}
-                                            height={100}
-                                        />
-                                    ) : (
-                                        "N/A"
-                                    )}
-                                </TableCell>
-                                <TableCell>{movie?.title ?? "N/A"}</TableCell>
-                                <TableCell>{movie?.year ?? "N/A"}</TableCell>
-                                <TableCell>{movie?.rated ?? "N/A"}</TableCell>
-                                <TableCell>{movie?.imdbrating ?? "N/A"}</TableCell>
-                                <TableCell>{movie?.plot ?? "N/A"}</TableCell>
-                                <TableCell>{movie?.genres?.join(", ") ?? "N/A"}</TableCell>
-                                <TableCell>
-                                    <div className="flex justify-end space-x-2">
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            onClick={() => handleEdit(movie)}
-                                            className="min-w-[120px] hover:bg-neutral-300 rounded-lg shadow-md"
-                                            aria-label={`Edit ${movie.title}`}
-                                        >
-                                            Edit
-                                        </Button>
-                                        <Button
-                                            variant="destructive"
-                                            size="sm"
-                                            onClick={() => handleDelete(movie)}
-                                            className="min-w-[120px] hover:bg-red-900 rounded-lg shadow-md"
-                                        // aria-label={`Delete ${movie.title}`}
-                                        >
-                                            Delete
-                                        </Button>
-                                    </div>
-                                </TableCell>
-                            </TableRow>
+                    >
+                        <option value="">All Ratings</option>
+                        {uniqueRated.map((rated) => (
+                            <option key={rated} value={rated}>
+                                {rated}
+                            </option>
                         ))}
-                    </TableBody>
-                </Table>
-
-                {/* Pagination Controls */}
-                <div className="flex justify-between items-center mt-4">
-                    <Button
-                        onClick={() => paginate(currentPage - 1)}
-                        disabled={currentPage === 1}
-                    >
-                        Previous
-                    </Button>
-                    <span>
-                        Page {currentPage} of {totalPages}
-                    </span>
-                    <Button
-                        onClick={() => paginate(currentPage + 1)}
-                        disabled={indexOfLastMovie >= filteredMovies.length}
-                    >
-                        Next
-                    </Button>
+                    </select>
                 </div>
-
-                {editingMovie && (
-                    <EditMovieForm
-                        movie={editingMovie}
-                        open={true}
-                        onSubmit={handleEditSubmit}
-                        onCancel={() => setEditingMovie(null)}
-                        isLoading={isSaving}
-                    />
-                )}
-                {deletingMovie &&
-                    <DeleteMovieDialog
-                        movie={deletingMovie}
-                        open={true}
-                        onCancel={() => setDeletingMovie(null)}
-                        onConfirm={() => handleDeleteConfirm(deletingMovie?.id)}
-                        isLoading={isDeleting}
-                    />
-                }
+                <div className="flex justify-between">
+                    <Button onClick={clearFilters} variant="outline">
+                        Clear Filters
+                    </Button>
+                    <div className="flex items-center space-x-2">
+                        <span>Items per page:</span>
+                        <select
+                            value={itemsPerPage}
+                            onChange={(e) => {
+                                setItemsPerPage(Number(e.target.value));
+                                setCurrentPage(1); // Reset to the first page when changing items per page
+                            }}
+                            className="p-2 border rounded"
+                        >
+                            <option value={10}>10</option>
+                            <option value={20}>20</option>
+                            <option value={50}>50</option>
+                        </select>
+                    </div>
+                </div>
             </div>
+
+            {/* Movie Table */}
+            <Table className="border">
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="font-extrabold text-center">#</TableHead>
+                        <TableHead className="font-extrabold"># Cover</TableHead>
+                        <TableHead className="font-extrabold">Movie Title</TableHead>
+                        <TableHead className="font-extrabold">Year</TableHead>
+                        <TableHead className="font-extrabold">Rated</TableHead>
+                        <TableHead className="font-extrabold">IMDB Rating</TableHead>
+                        <TableHead className="font-extrabold">Plot</TableHead>
+                        <TableHead className="font-extrabold">Genres</TableHead>
+                        <TableHead className="font-extrabold text-center">Actions</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {currentMovies.map((movie) => (
+                        <TableRow key={movie.id}>
+                            <TableCell className="text-center">{counter++}</TableCell>
+                            <TableCell className="text-center">
+                                {movie.poster ? (
+                                    <Image
+                                        src={movie.poster}
+                                        alt={movie.title || "Movie Poster"}
+                                        width={75}
+                                        height={100}
+                                    />
+                                ) : (
+                                    "N/A"
+                                )}
+                            </TableCell>
+                            <TableCell>{movie?.title ?? "N/A"}</TableCell>
+                            <TableCell>{movie?.year ?? "N/A"}</TableCell>
+                            <TableCell>{movie?.rated ?? "N/A"}</TableCell>
+                            <TableCell>{movie?.imdbrating ?? "N/A"}</TableCell>
+                            <TableCell>{movie?.plot ?? "N/A"}</TableCell>
+                            <TableCell>{movie?.genres?.join(", ") ?? "N/A"}</TableCell>
+                            <TableCell>
+                                <div className="flex justify-end space-x-2">
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => handleEdit(movie)}
+                                        className="min-w-[120px] hover:bg-neutral-300 rounded-lg shadow-md"
+                                        aria-label={`Edit ${movie.title}`}
+                                    >
+                                        Edit
+                                    </Button>
+                                    <Button
+                                        variant="destructive"
+                                        size="sm"
+                                        onClick={() => handleDelete(movie)}
+                                        className="min-w-[120px] hover:bg-red-900 rounded-lg shadow-md"
+                                    >
+                                        Delete
+                                    </Button>
+                                </div>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-between items-center mt-4">
+                <Button
+                    onClick={() => paginate(currentPage - 1)}
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </Button>
+                <span>
+                    Page {currentPage} of {totalPages}
+                </span>
+                <Button
+                    onClick={() => paginate(currentPage + 1)}
+                    disabled={indexOfLastMovie >= filteredMovies.length}
+                >
+                    Next
+                </Button>
+            </div>
+
+            {/* Edit and Delete Modals */}
+            {editingMovie && (
+                <EditMovieForm
+                    movie={editingMovie}
+                    open={true}
+                    onSubmit={handleEditSubmit}
+                    onCancel={() => setEditingMovie(null)}
+                    isLoading={isSaving}
+                />
+            )}
+            {deletingMovie && (
+                <DeleteMovieDialog
+                    movie={deletingMovie}
+                    open={true}
+                    onCancel={() => setDeletingMovie(null)}
+                    onConfirm={() => handleDeleteConfirm(deletingMovie?.id)}
+                    isLoading={isDeleting}
+                />
+            )}
         </div>
     );
 }
