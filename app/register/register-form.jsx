@@ -100,7 +100,7 @@ export default function RegisterForm() {
     };
     return (
         <main>
-            <div className="container w-full">
+            {/* <div className="container w-full">
                 <nav className="bg-blue-300 w-full h-14 flex p-4 justify-start items-center">
                     <div className="container">
                         <h1 className="text-4xl font-bold text-white">Mflix Dashboard</h1>
@@ -128,7 +128,7 @@ export default function RegisterForm() {
                         </Link>
                     </div>
                 </nav>
-            </div>
+            </div> */}
             <div className="flex justify-center items-center min-h-screen ">
                 <Card className="w-[350px] mx-auto mt-8 bg-blue-50/90 rounded-md shadow-black shadow-md  ">
                     <CardHeader className="text-center bg-blue-500 text-white rounded-t-md rounded-b-none  shadow-black shadow-md mt-0">

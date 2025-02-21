@@ -1,7 +1,7 @@
 // client component
 "use client";
 import react, { useState } from "react";
-
+import { redirect } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -50,13 +50,13 @@ export default function AddMovieForm() {
                 const resp = await createMovie({ title, year, plot, genres, rated, poster, imdbrating });
                 setIsLoading(false);
                 if (resp.success) {
-
                     toast({
                         variant: "success",
                         title: "Success",
                         description: "Movie Added successfully",
                         // action: <ToastAction altText="Try Again">Try again</ToastAction>,
                     });
+                    redirect("/moviesnewdb");
                 } else {
                     toast({
                         variant: "destructive",

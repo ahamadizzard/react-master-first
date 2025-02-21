@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { signIn } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
