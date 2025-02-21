@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { signIn } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import { Loader2 } from "lucide-react";
@@ -45,15 +45,14 @@ export default function LoginForm(props) {
       },
         {
           onSuccess: () => {
-            redirect("/dashboard");
             setLoading(false);
+            redirect("/dashboard");
           },
           onError: (ctx) => {
             if (ctx) {
               setError({
                 error: true,
                 message: ctx.error.message
-
               })
               setLoading(false)
             }
