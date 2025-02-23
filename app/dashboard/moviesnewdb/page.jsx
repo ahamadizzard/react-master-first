@@ -1,14 +1,7 @@
 import { Suspense } from "react";
-
 import { Eye, Shell } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-
-import { getMoviesNewDB } from "@/lib/apis/server";
-
 import Link from "next/link";
-// import MovieTable from "./movies-table";
-// import { MoviesTable } from "./movies-table";
 import {
     Card,
     CardContent,

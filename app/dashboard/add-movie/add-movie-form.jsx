@@ -1,4 +1,3 @@
-// client component
 "use client";
 import react, { useState } from "react";
 import { redirect } from "next/navigation";
@@ -68,9 +67,6 @@ export default function AddMovieForm() {
                 }
                 console.log("Saving movie Response Data: ", response);
                 setError(DEFAULT_ERROR);
-                // setIsLoading(false);
-                // router.push("/moviesnewdb");
-                // window.location.reload();
             }
             catch (error) {
                 toast({

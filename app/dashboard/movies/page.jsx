@@ -59,8 +59,6 @@ export default async function DashboardPage() {
                                                     width={200}
                                                     height={400}
                                                     priority={true}
-                                                // onError={() => setImageSrc("@/public/images/notfound.png")}
-                                                // onError={handleImageError}
                                                 />)}
                                         </div>
 
@@ -86,7 +84,6 @@ export default async function DashboardPage() {
                                         <Badge variant="success">
                                             {moviesQuery?.type || "Unknown"}
                                         </Badge>
-
                                     </CardFooter>
                                 </Card>
                             </div>

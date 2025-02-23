@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
+import { redirect } from "next/navigation";
 import {
     Card,
     CardHeader,
@@ -24,7 +24,6 @@ const DEFAULT_ERROR = {
 
 // this is a client component (functional component)
 export default function RegisterForm() {
-    // let errorStatus = false;
     const [error, setError] = useState(DEFAULT_ERROR); // this is a state variable to store the error message
     const [loading, setLoading] = useState(false);
     const { toast } = useToast();
@@ -57,7 +56,7 @@ export default function RegisterForm() {
                         onSuccess: (ctx) => {
                             // console.log("onSuccess", ctx);
                             // if (registerResponse?.error) {
-                            setError({ error: true, message: registerResponse.error });
+                            // setError({ error: true, message: ctx.error.message });
 
                             // } else {
                             toast({
@@ -67,6 +66,7 @@ export default function RegisterForm() {
                                 action: <ToastAction altText="Try Again">Try again</ToastAction>,
                             });
                             setLoading(false);
+                            redirect("/dashboard");
                             // }
 
                         },
@@ -75,11 +75,12 @@ export default function RegisterForm() {
                                 setError({
                                     error: true,
                                     message: ctx.error.message
-                                })
+                                });
+                                setLoading(false);
                                 toast({
                                     variant: "destructive",
                                     title: "error",
-                                    description: "User registered Failed " + registerResponse.error,
+                                    description: "User registered Failed " + ctx.error.message,
                                     // action: <ToastAction altText="Try Again">Try again</ToastAction>,
                                 });
                                 setLoading(false);
@@ -100,35 +101,6 @@ export default function RegisterForm() {
     };
     return (
         <main>
-            {/* <div className="container w-full">
-                <nav className="bg-blue-300 w-full h-14 flex p-4 justify-start items-center">
-                    <div className="container">
-                        <h1 className="text-4xl font-bold text-white">Mflix Dashboard</h1>
-                    </div>
-                    <div className="flex justify-end items-center">
-                        <Link
-                            className="bg-blue-400 flex hover:bg-blue-500 text-white font-bold py-1 px-3 rounded"
-                            href="/"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="size-6"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                                />
-                            </svg>
-                            <p>&nbsp;Home</p>
-                        </Link>
-                    </div>
-                </nav>
-            </div> */}
             <div className="flex justify-center items-center min-h-screen ">
                 <Card className="w-[350px] mx-auto mt-8 bg-blue-50/90 rounded-md shadow-black shadow-md  ">
                     <CardHeader className="text-center bg-blue-500 text-white rounded-t-md rounded-b-none  shadow-black shadow-md mt-0">

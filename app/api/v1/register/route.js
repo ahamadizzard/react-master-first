@@ -16,12 +16,6 @@ export const POST = async (req) => {
       );
     }
 
-    //TODO: you can add further validations here
-
-    // Bind Database
-    // const client = await clientPromise();
-    // const db = await client.db("sample_mflix");
-
     // Find the user in the database
     const isExistingUser = await db.collection("users").findOne({ email }); // email is the key and value is the email from the request
     // console.log("isExistingUser: ", isExistingUser);
