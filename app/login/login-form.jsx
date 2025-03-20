@@ -39,8 +39,11 @@ export default function LoginForm(props) {
   const handleSubmit = async (e) => {
     e.preventDefault(); // prevent page refresh
     const isValid = validateForm();
+    // Check if the email and password are valid
     if (isValid) {
+      // Set the loading state to true
       setLoading(true);
+      // Call the signIn.email function with the email and password
       await signIn.email({
         email, password,
       },

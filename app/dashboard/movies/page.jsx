@@ -11,7 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { getMovies } from "@/lib/apis/server";
 import Image from "next/image";
-export const revalidate = 60;
+// export const revalidate = 60;
 export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {

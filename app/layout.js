@@ -20,7 +20,7 @@ const geistMono = localFont({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" className="light" suppressHydrationWarning>
       <title>Learning ReactMaster @ Evotech</title>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden bg-blue-200`}
