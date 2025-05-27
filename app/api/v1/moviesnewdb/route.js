@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "lib/mongodb";
+import { db } from "@/lib/mongodb";
 
 export const GET = async (req) => {
   // Get Movies from the MongoDB
